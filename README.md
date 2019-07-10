@@ -1,1 +1,2 @@
-# php-namespace-use
+# PHP命名空间概念与使用
+本文主要讲解PHP的命名空间与使用
