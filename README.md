@@ -37,7 +37,7 @@
         include(__DIR__ .DIRECTORY_SEPARATOR."Model".DIRECTORY_SEPARATOR. $class . ".php");
   }
   spl_autoload_register("\app\myAutoload");
-  $a  = new \app\Model\test();
+  $a  = new test(); #也可使用：$a  = new \app\Model\test();
   $a->sayHello();
   
   #备注
