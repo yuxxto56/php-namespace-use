@@ -25,3 +25,28 @@
   }
 ?>
 ```
+* index.php文件编码：
+```
+<?php
+  namespace app;  
+  use app\Model\test; 
+  function myAutoload ($class) {
+        if(strripos($class,'\\') !== false){
+            $class = substr($class,strripos($class,'\\')+1);
+        }
+        include(__DIR__ .DIRECTORY_SEPARATOR."Model".DIRECTORY_SEPARATOR. $class . ".php");
+  }
+  spl_autoload_register("\app\myAutoload");
+  $a  = new \app\Model\test();
+  $a->sayHello();
+  
+  #备注
+  namespace app;  #定义index.php是在app目录下工作的
+  use app\Model\test; 
+  1、命名空间导入\别名操作符,使用它可以简化实例化其他目录下的文件类、函数等，当前表示导入Model目录下test.php文件下test类
+  2、使用use app\Model\test;,则实例化可直接$a=new test();即可，不使用实例化则必须 $a  = new \app\Model\test();
+  3、前提:use操作符不是真正意义上导入，而是简化被实例化对象类对应的命名空间，使用上诉，则必须通过自动加载方法遍历需要加载的目录文件，php通常使用自动加载方法函数是：spl_autoload_register，index.php文件也有例子。
+  
+```
+### 引用
+PHP命名空间参考：[https://www.php.net/manual/zh/language.namespaces.php](https://www.php.net/manual/zh/language.namespaces.php)
